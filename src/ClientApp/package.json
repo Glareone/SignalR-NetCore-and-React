@@ -1,0 +1,24 @@
+{
+  "name": "signalr-client-app",
+  "version": "1.0.0",
+  "description": "client app for poker estimation using signalR",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Glareone/SignalR-NetCore-and-React.git"
+  },
+  "keywords": [
+    "SignalR",
+    "React",
+    "NetCore"
+  ],
+  "author": "Aleksei Glareone",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Glareone/SignalR-NetCore-and-React/issues"
+  },
+  "homepage": "https://github.com/Glareone/SignalR-NetCore-and-React#readme"
+}

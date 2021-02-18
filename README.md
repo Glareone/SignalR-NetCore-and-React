@@ -7,3 +7,9 @@ Additional articla related to .NetCore 3.1 Hubs (SignalR in netcore world): [Sig
 
 FE Part base on Reactapp.
 BE Part base on NetCore.
+
+
+## TODO
+* Add SigSpec as a web interface for WebAPI project because swagger is not really able to describe SignalR hubs.  
+  [SigSpec](https://github.com/RicoSuter/SigSpec)  - Link to the sigspec project and its description  
+  [Github discussion](https://github.com/aspnet/SignalR/issues/2913) - Issue and discussion

@@ -15,8 +15,9 @@ namespace WebAPI.Hubs
         }
 
         public async Task SubscribeToBoard(Guid boardId)
-        { 
-            
+        {
+            await Groups.AddToGroupAsync(Context.ConnectionId, boardId.ToString());
+            await Clients.Caller.SendAsync("Message", "Added to the board successfully");
         }
     }
 }

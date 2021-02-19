@@ -2,7 +2,8 @@ import { Board } from '../models/board';
 import { UserModel } from '../models/user-model';
 
 export const baseURL = process.env.REACT_APP_BASE_URL;
-const scrumPokerURL = baseURL + '/scrum-poker';
+// const scrumPokerURL = baseURL + '/scrum-poker';
+const scrumPokerURL = 'http://localhost:5001/scrum-poker';
 
 export const createBoard = async (board: Board): Promise<string> => {
     const result = await apiFetchUpdate(`${scrumPokerURL}/boards`, board);

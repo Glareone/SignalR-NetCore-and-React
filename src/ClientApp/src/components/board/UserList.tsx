@@ -58,7 +58,10 @@ export const UserList: FC<{ state: boolean }> = ({ state }) => {
     return (
         <div className="container">
             {users.map((u) => (
-                <User key={u.id} data={u} hiddenState={state} />
+                <User
+                    key={u.userId}
+                    user={u}
+                    /*hiddenState={state}*/ />
             ))}
         </div>
     );

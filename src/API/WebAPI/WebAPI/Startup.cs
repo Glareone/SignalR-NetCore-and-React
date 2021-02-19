@@ -1,8 +1,13 @@
+using WebAPI.Contracts;
+using WebAPI.Infrastructure.NotificationHub;
+using WebAPI.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
+using StackExchange.Redis;
 
 namespace WebAPI
 {
@@ -19,8 +24,6 @@ namespace WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddSignalR();
-
             services.AddCors(options =>
                 options.AddPolicy("CorsPolicy",
                     builder =>
@@ -28,6 +31,22 @@ namespace WebAPI
                         .AllowAnyHeader()
                         .WithOrigins("http://localhost:3000")
                         .AllowCredentials()));
+
+            services.AddSignalR();
+
+            services.AddTransient<IScrumRepository, ScrumRepository>();
+
+            services.Configure<APISettings>(Configuration);
+
+            services.AddSingleton<ConnectionMultiplexer>(sp =>
+            {
+                var settings = sp.GetRequiredService<IOptions<APISettings>>().Value;
+                var configuration = ConfigurationOptions.Parse(settings.ConnectionString, true);
+
+                configuration.ResolveDns = true;
+
+                return ConnectionMultiplexer.Connect(configuration);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -37,9 +56,7 @@ namespace WebAPI
             {
                 app.UseDeveloperExceptionPage();
             }
-
             app.UseCors("CorsPolicy");
-
             app.UseHttpsRedirection();
 
             app.UseRouting();
@@ -49,7 +66,7 @@ namespace WebAPI
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapHub<Hubs.ScrumBoardHub>("/scrumboardhub"); // Register our Hub
+                endpoints.MapHub<ScrumBoardHub>("/scrumboardhub");
             });
         }
     }

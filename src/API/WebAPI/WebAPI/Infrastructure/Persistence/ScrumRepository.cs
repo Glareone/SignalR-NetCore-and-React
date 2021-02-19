@@ -39,6 +39,21 @@ namespace WebAPI.Infrastructure.Persistence
             return await AddBoard(board);
         }
 
+        public async Task<bool> RemoveUserFromBoard(Guid boardId, Guid userId)
+        {
+            var data = await database.StringGetAsync(boardId.ToString());
+
+            if (data.IsNullOrEmpty)
+            {
+                return false;
+            }
+
+            var board = JsonSerializer.Deserialize<ScrumBoard>(data);
+            //board.Users = board.Users.Where(u => u.Id != userId).ToList();
+            board.Users.RemoveAll(u => u.UserId == userId);
+            return await AddBoard(board);
+        }
+
         public async Task<bool> ClearUsersPoint(Guid boardId)
         {
             var data = await database.StringGetAsync(boardId.ToString());
@@ -49,12 +64,12 @@ namespace WebAPI.Infrastructure.Persistence
             }
 
             var board = JsonSerializer.Deserialize<ScrumBoard>(data);
-            board.Users = board.Users.Select(u => { u.Point = 0; return u; }).ToList();
+            board.Users.ForEach(u => u.Point = 0);
 
             return await AddBoard(board);
         }
 
-        public async Task<IList<User>> GetUsersFromBoard(Guid boardId)
+        public async Task<List<User>> GetUsersFromBoard(Guid boardId)
         {
             var data = await database.StringGetAsync(boardId.ToString());
 
@@ -68,11 +83,26 @@ namespace WebAPI.Infrastructure.Persistence
             return board.Users;
         }
 
+        public async Task<bool> TogglePoints(Guid boardId, bool state)
+        {
+            var data = await database.StringGetAsync(boardId.ToString());
+
+            if (data.IsNullOrEmpty)
+            {
+                return false;
+            }
+
+            var board = JsonSerializer.Deserialize<ScrumBoard>(data);
+            board.Users.ForEach(u => u.ShowPoint = state);
+
+            return await AddBoard(board);
+        }
+
         public async Task<bool> UpdateUserPoint(Guid boardId, Guid userId, int point)
         {
             var data = await database.StringGetAsync(boardId.ToString());
             var board = JsonSerializer.Deserialize<ScrumBoard>(data);
-            var user = board.Users.FirstOrDefault(u => u.Id == userId);
+            var user = board.Users.FirstOrDefault(u => u.UserId == userId);
             if (user != null)
             {
                 user.Point = point;

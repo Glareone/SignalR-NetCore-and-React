@@ -6,6 +6,11 @@ namespace WebAPI.Contracts
     public class ScrumBoard
     {
         public Guid Id { get; set; }
-        public IList<User> Users { get; set; }
+
+        public string Name { get; set; }
+
+        public string Description { get; set; }
+
+        public List<User> Users { get; set; } = new List<User>();
     }
 }

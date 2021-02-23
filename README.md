@@ -13,6 +13,9 @@ BE Part base on NetCore.
 2) Install free "Another Redis Desktop Manager" from official [page](https://www.electronjs.org/apps/anotherredisdesktopmanager)
 3) Using Redis Desktop Manager create database on localhost(127.0.0.1) with standart port 
 
+### Important Tips
+1) Redis version should be 2.1.8. Seems like it doesn't work with 2.2.0+ versions. No idea why.
+
 ## TODO
 [x] <u>**Doesn't work with .Net core 3**</u> Add SigSpec as a web interface for WebAPI project because swagger is not really able to describe SignalR hubs.  
    [SigSpec](https://github.com/RicoSuter/SigSpec)  - Link to the sigspec project and its description    

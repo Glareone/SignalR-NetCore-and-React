@@ -1,4 +1,3 @@
-using WebAPI.Contracts;
 using WebAPI.Infrastructure.NotificationHub;
 using WebAPI.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Builder;

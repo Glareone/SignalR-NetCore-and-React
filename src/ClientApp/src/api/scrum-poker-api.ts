@@ -2,11 +2,9 @@ import { Board } from '../models/board';
 import { UserModel } from '../models/user-model';
 
 export const baseURL = process.env.REACT_APP_BASE_URL;
-const env = process.env.NODE_ENV;
 const scrumPokerURL = `${baseURL}/scrum-poker`;
 
 export const createBoard = async (board: Board): Promise<string> => {
-    debugger;
     const result = await apiFetchUpdate(`${scrumPokerURL}/boards`, board);
     return result as string;
 };
@@ -15,7 +13,6 @@ export const createUser = async (
     boardId: string,
     user: UserModel,
 ): Promise<string> => {
-    debugger;
     const result = await apiFetchUpdate(
         `${scrumPokerURL}/boards/${boardId}/users`,
         user,
@@ -27,7 +24,6 @@ export const updateUserPoint = async (
     boardId: string,
     user: UserModel,
 ): Promise<boolean> => {
-    debugger;
     const result = await apiFetchUpdate(
         `${scrumPokerURL}/boards/${boardId}/users`,
         user,
@@ -40,7 +36,6 @@ export const deleteUser = async (
     boardId: string,
     userId: string,
 ): Promise<boolean> => {
-    debugger;
     const result = await apiFetchUpdate(
         `${scrumPokerURL}/boards/${boardId}/users/${userId}`,
         null,
@@ -53,7 +48,6 @@ export const togglePointVisibility = async (
     boardId: string,
     state: boolean,
 ): Promise<boolean> => {
-    debugger;
     const result = await apiFetchUpdate(
         `${scrumPokerURL}/boards/${boardId}/${state}`,
         null,
@@ -70,7 +64,6 @@ export const getUser = async (
     boardId: string,
     userId: string,
 ): Promise<UserModel> => {
-    debugger;
     const result = apiFetchGET(
         `${scrumPokerURL}/boards/${boardId}/users/${userId}`,
     );
@@ -78,7 +71,6 @@ export const getUser = async (
 };
 
 export const clearUsersPoint = async (boardId: string) => {
-    debugger;
     const result = apiFetchUpdate(`${scrumPokerURL}/boards/${boardId}`, null);
     return result;
 };
@@ -88,7 +80,6 @@ const apiFetchUpdate = async (
     body: any,
     method: string = 'POST',
 ): Promise<any> => {
-    debugger;
     const response = await fetch(url, {
         method: method,
         mode: 'cors',
@@ -104,7 +95,6 @@ const apiFetchUpdate = async (
 };
 
 const apiFetchGET = async (url: string): Promise<any> => {
-    debugger;
     const response = await fetch(url, {
         method: 'GET',
         mode: 'cors',

@@ -17,7 +17,7 @@ const ScoreChart: FC<{ scores: Score[] }> = (props) => {
         <ResponsiveContainer width="100%" height={300}>
             <BarChart data={props.scores} margin={{ top: 90, left: 0, bottom: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="point"></XAxis>
+                <XAxis dataKey="point" />
                 <YAxis />
                 <Tooltip />
                 <Bar

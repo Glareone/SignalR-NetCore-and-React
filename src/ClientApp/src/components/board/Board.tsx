@@ -10,7 +10,7 @@ export const Board = () => {
             <CardList />
             <UserList
                 state={false}
-            ></UserList>
+            />
         </>
     );
 };

@@ -48,8 +48,11 @@ const CardList = () => {
     return (
         <div className="card-group">
             {cards.map((c) => (
-                <Card key={c.name} {...c} cardClick={onCardClickHandler}></Card>
-            ))}
+                <Card
+                    key={c.name}
+                    {...c}
+                    cardClick={onCardClickHandler}
+                />))}
         </div>
     );
 };

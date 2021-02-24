@@ -3,8 +3,6 @@ import './SprintDetail.css';
 import { useHistory, Link } from 'react-router-dom';
 import { King } from '../common/King';
 import { createBoard } from '../../api/scrum-poker-api';
-import { Copy } from '../common/Copy';
-import CopyText from '../common/CopyText';
 import { adminContext } from '../../models/context';
 
 export const SprintDetail = () => {
@@ -32,7 +30,7 @@ export const SprintDetail = () => {
         <div className="container container-card">
             <div className="card mb-3">
                 <div className="row no-gutters">
-                    <King></King>
+                    <King />
                     <div className="col-md-8">
                         <div className="card-body">
                             <h5 className="card-title">Create your poker board</h5>
@@ -59,13 +57,13 @@ export const SprintDetail = () => {
                                     isLoading ? 'disabled' : ''
                                 }`}
                             >
-                                {isLoading === true ? (
+                                { isLoading ? (
                                     <>
                                         <span
                                             className="spinner-border spinner-border-sm mr-2"
                                             role="status"
                                             aria-hidden="true"
-                                        ></span>
+                                        />
                                         <span>Creating ...</span>
                                     </>
                                 ) : (
